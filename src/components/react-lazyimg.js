@@ -26,7 +26,6 @@ export default class extends React.Component{
 
   initialState(){
     const {url} = this.props;
-    console.log(this.props)
     this.state = {
       loaded:false,
       url
