@@ -25,14 +25,18 @@ export default class extends React.Component{
   }
 
   initialState(){
+    const {url} = this.props;
+    console.log(this.props)
     this.state = {
-      loaded:false
+      loaded:false,
+      url
     };
   }
 
-  componentReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps){
     if(this.props.url!==nextProps.url){
       this.initialState();
+      this.setState(nextProps)
     }
   }
 
@@ -63,7 +67,8 @@ export default class extends React.Component{
   }
 
   getFadeChildren(){
-    const {url,title,effect,className,style} = this.props;
+    const {title,effect,className,style} = this.props;
+    const {url} = this.state;
     return (
       <img
       data-effect={effect}
@@ -89,10 +94,9 @@ export default class extends React.Component{
   }
 
   _onFade(inEvent){
-    const {url,onLoad} = this.props;
+    const {onLoad} = this.props;
     const dom = inEvent.target;
-    const {loaded} = this.state;
-
+    const {loaded,url} = this.state;
     if(!loaded){
       this.setState({loaded:true},()=>{
         dom.removeAttribute('data-src');

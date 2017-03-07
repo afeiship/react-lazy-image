@@ -3,6 +3,19 @@ import ReactLazyimg from './main';
 
 
 class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      test:'http://himg.bdimg.com/sys/portrait/item/be10475f686d6c723db0023244.jpg'
+    };
+  }
+  componentWillMount(){
+    setTimeout(()=>{
+      this.setState({
+        test:'https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+      });
+    },2000)
+  }
   render(){
     return (
       <div className="hello-react-lazyimg">
@@ -15,7 +28,7 @@ class App extends React.Component{
         <h1>Fade</h1>
         <ReactLazyimg
         effect="fade"
-        url="https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" title="Fei's logo" size="30px" />
+        url={this.state.test} title="Fei's logo" size="30px" />
       </div>
     );
   }
