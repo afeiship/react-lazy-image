@@ -10,11 +10,13 @@ export default class extends React.Component{
     placeholder:React.PropTypes.string,
     effect:React.PropTypes.oneOf(['replace', 'fade']),
     onLoad:React.PropTypes.func,
+    style:React.PropTypes.object
   };
 
   static defaultProps = {
     onLoad:noop,
-    effect:'replace'
+    effect:'replace',
+    style:{}
   };
 
   constructor(props) {
@@ -37,7 +39,7 @@ export default class extends React.Component{
   }
 
   getReplaceChildren(){
-    const {url,placeholder,title,className,effect} = this.props;
+    const {url,placeholder,title,className,effect,style} = this.props;
     let target = placeholder || url;
 
     return (
@@ -45,18 +47,20 @@ export default class extends React.Component{
       data-effect={effect}
       className={classNames('react-lazyimg',className)}
       src={target} title={title}
+      style={style}
       onLoad={this._onReplace.bind(this)} />
     );
   }
 
   getFadeChildren(){
-    const {url,effect,className} = this.props;
+    const {url,title,effect,className,style} = this.props;
     return (
       <img
       data-effect={effect}
       className={classNames('react-lazyimg',className)}
       data-src={url}
-      src={url}
+      src={url} title={title}
+      style={style}
       onLoad={this._onFade.bind(this)} />
     );
   }
