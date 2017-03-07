@@ -21,9 +21,19 @@ export default class extends React.Component{
 
   constructor(props) {
     super(props);
+    this.initialState();
+  }
+
+  initialState(){
     this.state = {
       loaded:false
     };
+  }
+
+  componentReceiveProps(nextProps){
+    if(this.props.url!==nextProps.url){
+      this.initialState();
+    }
   }
 
 
