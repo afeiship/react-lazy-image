@@ -39,6 +39,7 @@ export default class extends React.Component{
   getReplaceChildren(){
     const {url,placeholder,title,className,effect} = this.props;
     let target = placeholder || url;
+
     return (
       <img
       data-effect={effect}
@@ -74,7 +75,7 @@ export default class extends React.Component{
   }
 
   _onFade(inEvent){
-    const {url} = this.props;
+    const {url,onLoad} = this.props;
     const dom = inEvent.target;
     const {loaded} = this.state;
 
