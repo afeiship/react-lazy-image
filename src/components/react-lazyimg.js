@@ -1,17 +1,18 @@
 import './style.scss';
+import React,{PropTypes} from 'react';
 import classNames from 'classnames';
 import noop from 'noop';
 
 export default class extends React.Component{
 
   static propTypes = {
-    title:React.PropTypes.string,
-    url:React.PropTypes.string,
-    placeholder:React.PropTypes.string,
-    effect:React.PropTypes.oneOf(['replace', 'fade']),
-    onLoad:React.PropTypes.func,
-    onClick:React.PropTypes.func,
-    style:React.PropTypes.object
+    title:PropTypes.string,
+    url:PropTypes.string,
+    placeholder:PropTypes.string,
+    effect:PropTypes.oneOf(['replace', 'fade']),
+    onLoad:PropTypes.func,
+    onClick:PropTypes.func,
+    style:PropTypes.object
   };
 
   static defaultProps = {
