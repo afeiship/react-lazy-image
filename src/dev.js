@@ -1,6 +1,6 @@
 import './dev.scss';
 import ReactLazyimg from './main';
-
+import lazyImg from 'assets/lazyimg.jpg';
 
 class App extends React.Component{
   constructor(props){
