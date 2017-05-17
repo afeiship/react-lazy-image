@@ -1,4 +1,5 @@
 import './dev.scss';
+
 import ReactLazyimg from './main';
 import lazyImg from 'assets/lazyimg.jpg';
 
@@ -12,7 +13,7 @@ class App extends React.Component{
   componentWillMount(){
     setTimeout(()=>{
       this.setState({
-        test:'https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+        test:'https://www.baidu.com/img/bd_logo1.png'
       });
     },2000)
   }
@@ -23,7 +24,7 @@ class App extends React.Component{
         <ReactLazyimg
         effect="replace"
         placeholder="http://himg.bdimg.com/sys/portrait/item/be10475f686d6c723db0023244.jpg"
-        url="https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" title="Fei's logo" size="30px" />
+        url="https://www.baidu.com/img/bd_logo1.png" title="Fei's logo" size="30px" />
 
         <h1>Fade</h1>
         <ReactLazyimg

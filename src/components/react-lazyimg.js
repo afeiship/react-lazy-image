@@ -1,5 +1,7 @@
 import './style.scss';
-import React,{PropTypes} from 'react';
+
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 import noop from 'noop';
 
@@ -43,7 +45,7 @@ export default class extends React.Component{
   }
 
 
-  getChildren(){
+  get children(){
     const {effect} = this.props;
     switch(effect){
       case 'replace':
@@ -111,6 +113,6 @@ export default class extends React.Component{
 
 
   render(){
-    return this.getChildren();
+    return this.children;
   }
 }
