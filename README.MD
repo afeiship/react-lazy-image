@@ -1,18 +1,27 @@
-#react-lazyimg
+# react-lazyimg
 > Lazy load image with placeholder for react js.
 
 
-## resource:
-+ http://www.cnblogs.com/Kummy/p/4966937.html
-+ https://github.com/steven5538/vue-button
-+ https://yarnpkg.com/en/docs/install
-
 
 ## props:
-| name | type | value | description |
-| :----| :----| :----| :----|
-| visible  | Boolean | true/false | v-show |
+```javascript
+  static propTypes = {
+    title:PropTypes.string,
+    url:PropTypes.string,
+    placeholder:PropTypes.string,
+    effect:PropTypes.oneOf(['replace', 'fade']),
+    onLoad:PropTypes.func,
+    onClick:PropTypes.func,
+    style:PropTypes.object
+  };
 
+  static defaultProps = {
+    onLoad:noop,
+    onClick:noop,
+    effect:'replace',
+    style:{}
+  };
+```
 
 ## usage:
 ```html
@@ -27,3 +36,7 @@
 ## resouces:
 + http://jsfiddle.net/UtnHS/
 + https://facebook.github.io/react/docs/typechecking-with-proptypes.html
++ http://www.cnblogs.com/Kummy/p/4966937.html
++ https://github.com/steven5538/vue-button
++ https://yarnpkg.com/en/docs/install
+
