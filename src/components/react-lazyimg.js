@@ -5,7 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 import noop from 'noop';
 
-export default class extends React.Component{
+export default class extends React.PureComponent{
 
   static propTypes = {
     title:PropTypes.string,
