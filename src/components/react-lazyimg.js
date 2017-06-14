@@ -113,8 +113,8 @@ export default class extends React.PureComponent{
 
 
   render(){
-    const {url} = this.props;
-    if(url){
+    const {url,placeholder} = this.props;
+    if(url && placeholder){
       return this.children;
     }
     return null;
