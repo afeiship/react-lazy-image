@@ -8,16 +8,20 @@ import noop from 'noop';
 export default class extends React.PureComponent{
 
   static propTypes = {
+    lazy:PropTypes.string,
     title:PropTypes.string,
     url:PropTypes.string,
     placeholder:PropTypes.string,
-    effect:PropTypes.oneOf(['replace', 'fade']),
+    effect:PropTypes.oneOf([
+      'replace', 'fade'
+    ]),
     onLoad:PropTypes.func,
     onClick:PropTypes.func,
     style:PropTypes.object
   };
 
   static defaultProps = {
+    lazy: false,
     onLoad:noop,
     onClick:noop,
     effect:'replace',
@@ -44,9 +48,8 @@ export default class extends React.PureComponent{
     }
   }
 
-
   get children(){
-    const {effect} = this.props;
+    const { effect } = this.props;
     switch(effect){
       case 'replace':
         return this.getReplaceChildren();
@@ -57,11 +60,12 @@ export default class extends React.PureComponent{
   }
 
   getReplaceChildren(){
-    const {url,placeholder,title,className,effect,style,onClick} = this.props;
+    const {url,placeholder,title,className,effect,style,lazy,onClick} = this.props;
     let target = placeholder || url;
 
     return (
       <img
+      ref='root'
       data-effect={effect}
       className={classNames('react-lazyimg',className)}
       src={target} title={title}
@@ -72,10 +76,11 @@ export default class extends React.PureComponent{
   }
 
   getFadeChildren(){
-    const {title,effect,className,style,onClick} = this.props;
+    const {title,effect,className,style,lazy,onClick} = this.props;
     const {url} = this.state;
     return (
       <img
+      ref='root'
       data-effect={effect}
       className={classNames('react-lazyimg',className)}
       data-src={url}
@@ -86,27 +91,26 @@ export default class extends React.PureComponent{
     );
   }
 
-
-  _onReplace(inEvent){
+  _onReplace(){
     const {url,placeholder,onLoad} = this.props;
-    const dom = inEvent.target;
-    const {loaded} = this.state;
+    const dom = this.refs.root;
+    const { loaded } = this.state;
     if(!loaded && placeholder){
       this.setState({loaded:true},()=>{
         dom.src=url;
-        onLoad.call(this,inEvent);
+        onLoad.call(this);
       });
     }
   }
 
-  _onFade(inEvent){
+  _onFade(){
     const {onLoad} = this.props;
-    const dom = inEvent.target;
-    const {loaded,url} = this.state;
+    const dom = this.refs.root;
+    const { loaded,url } = this.state;
     if(!loaded){
-      this.setState({loaded:true},()=>{
+      this.setState({ loaded:true },()=>{
         dom.removeAttribute('data-src');
-        onLoad.call(this,inEvent);
+        onLoad.call(this);
       });
     }
   }

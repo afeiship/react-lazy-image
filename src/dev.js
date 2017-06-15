@@ -13,7 +13,7 @@ class App extends React.Component{
   componentWillMount(){
     setTimeout(()=>{
       this.setState({
-        test:'https://www.baidu.com/img/bd_logo1.png'
+        // test:'https://www.baidu.com/img/bd_logo1.png'
       });
     },2000)
   }
@@ -29,7 +29,7 @@ class App extends React.Component{
         <h1>Fade</h1>
         <ReactLazyimg
         effect="fade"
-        url={this.state.test} title="Fei's logo" size="30px" />
+        url='https://www.baidu.com/img/bd_logo1.png' title="Fei's logo" size="30px" />
       </div>
     );
   }
