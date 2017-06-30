@@ -43,7 +43,7 @@ export default class extends React.PureComponent{
       this.setState(nextProps)
     }
 
-    if(this.props.lazy && !nextProps.lazy){
+    if(this.props.lazy && !nextProps.lazy && !this.state.loaded){
       this.doShown();
     }
   }
