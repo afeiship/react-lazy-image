@@ -39,7 +39,7 @@ export default class extends React.PureComponent{
 
   componentWillReceiveProps(nextProps){
     const {url,lazy} = nextProps;
-    if(this.props.url !== url){
+    if(this.state.url !== url){
       this.initialState(nextProps);
       this.setState(this.state);
     }
@@ -49,11 +49,17 @@ export default class extends React.PureComponent{
     }
   }
 
+  shouldComponentUpdate(){
+    const {effect} = this.props;
+    const {loaded} = this.state;
+    return effect === 'replace' ? true : !loaded;
+  }
+
   doShown(){
     const {root} = this.refs;
     const {onLoad,effect} = this.props;
     const {url} = this.state;
-    this.setState({ loaded:true, lazy:false },()=>{
+    this.setState({ loaded:true },()=>{
       effect ==='replace' ? ( root.src=url ): (root.removeAttribute('data-src'));
       onLoad.call(this);
     });
@@ -70,6 +76,7 @@ export default class extends React.PureComponent{
 
   render(){
     const {url,placeholder,className,effect,lazy,...props} = this.props;
+    const {loaded} = this.state;
     const target = placeholder || (lazy ? null : url);
     return (
       <img
