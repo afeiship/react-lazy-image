@@ -38,12 +38,13 @@ export default class extends React.PureComponent{
   }
 
   componentWillReceiveProps(nextProps){
-    if(this.props.url !== nextProps.url){
-      this.initialState();
-      this.setState(nextProps)
+    const {url,lazy} = nextProps;
+    if(this.props.url !== url){
+      this.initialState(nextProps);
+      this.setState(this.state);
     }
 
-    if(this.props.lazy && !nextProps.lazy && !this.state.loaded){
+    if(this.props.lazy && !lazy && !this.state.loaded){
       this.doShown();
     }
   }
