@@ -69,7 +69,7 @@ export default class extends React.PureComponent{
 
   render(){
     const {url,placeholder,className,effect,lazy,...props} = this.props;
-    const target = placeholder || url;
+    const target = placeholder || (lazy ? null : url);
     return (
       <img
         ref='root'
