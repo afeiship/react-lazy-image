@@ -44,21 +44,21 @@ export default class extends React.PureComponent{
       this.setState(this.state);
     }
 
-    if(this.props.lazy && !lazy && !this.state.loaded){
+    if(this.props.lazy && !lazy){
       this.doShown();
     }
   }
 
-  shouldComponentUpdate(){
-    const {effect} = this.props;
-    const {loaded} = this.state;
-    return effect === 'replace' ? true : !loaded;
+  shouldComponentUpdate(nextProps){
+    const { effect } = this.props;
+    const { url,loaded } = this.state;
+    return url!== nextProps.url || (effect === 'replace' || !loaded);
   }
 
   doShown(){
-    const {root} = this.refs;
-    const {onLoad,effect} = this.props;
-    const {url} = this.state;
+    const { root } = this.refs;
+    const { onLoad,effect } = this.props;
+    const { url } = this.state;
     this.setState({ loaded:true },()=>{
       effect ==='replace' ? ( root.src=url ): (root.removeAttribute('data-src'));
       onLoad.call(this);
