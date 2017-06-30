@@ -53,7 +53,7 @@ export default class extends React.PureComponent{
     const {root} = this.refs;
     const {onLoad,effect} = this.props;
     const {url} = this.state;
-    this.setState({ loaded:true },()=>{
+    this.setState({ loaded:true, lazy:false },()=>{
       effect ==='replace' ? ( root.src=url ): (root.removeAttribute('data-src'));
       onLoad.call(this);
     });
