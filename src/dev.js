@@ -11,6 +11,7 @@ class App extends React.Component{
       test:'http://himg.bdimg.com/sys/portrait/item/be10475f686d6c723db0023244.jpg'
     };
   }
+
   componentWillMount(){
     setTimeout(()=>{
       this.setState({

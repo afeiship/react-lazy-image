@@ -49,11 +49,11 @@ export default class extends React.PureComponent{
   }
 
   doShown(){
-    const dom = this.refs.root;
+    const {root} = this.refs;
     const {onLoad,effect} = this.props;
     const {url} = this.state;
     this.setState({ loaded:true },()=>{
-      effect ==='replace' ? ( dom.src=url ): (dom.removeAttribute('data-src'));
+      effect ==='replace' ? ( root.src=url ): (root.removeAttribute('data-src'));
       onLoad.call(this);
     });
   }
