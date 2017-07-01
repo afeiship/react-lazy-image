@@ -84,6 +84,7 @@ export default class extends React.PureComponent{
         data-effect={effect}
         className={classNames('react-lazyimg',className)}
         data-src={url}
+        data-loaded={loaded}
         src={target}
         onLoad={this._onLoad} />
     );
