@@ -32,6 +32,8 @@
 </div>
 ```
 
+## todos:
+- [ ] placehodlder should be a component but not a img path.
 
 ## resouces:
 + http://jsfiddle.net/UtnHS/
