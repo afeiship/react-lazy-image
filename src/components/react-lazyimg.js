@@ -27,6 +27,7 @@ export default class extends React.PureComponent{
   constructor(props) {
     super(props);
     this.initialState();
+    this._counter = 0;
   }
 
   initialState(){
@@ -59,16 +60,27 @@ export default class extends React.PureComponent{
     const { root } = this.refs;
     const { onLoad,effect } = this.props;
     const { url } = this.state;
-    this.setState({ loaded:true },()=>{
-      effect ==='replace' ? ( root.src=url ): (root.removeAttribute('data-src'));
-      onLoad.call(this);
-    });
+    if(effect === 'fade'){
+      this.setState({ loaded:true },()=>{
+        root.removeAttribute('data-src');
+        onLoad.call(this);
+      })
+    }else{
+      if(this._counter === 2){
+        this.setState({ loaded:true },()=>{
+          onLoad.call(this);
+        });
+      }else{
+        root.src=url;
+      }
+    }
   }
 
   _onLoad = inEvent => {
     const {loaded} = this.state;
     const {lazy} = this.props;
     if(!loaded && !lazy){
+      this._counter++;
       this.doShown();
     }
   };
