@@ -93,6 +93,7 @@ export default class extends React.PureComponent{
     return (
       <img
         ref='root'
+        {...props}
         data-effect={effect}
         className={classNames('react-lazyimg',className)}
         data-src={url}
