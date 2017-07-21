@@ -15,14 +15,12 @@ export default class extends React.PureComponent{
       'replace',
       'fade'
     ]),
-    loaded: PropTypes.bool,
-    onLoad: PropTypes.func,
+    onLoad:PropTypes.func,
   };
 
   static defaultProps = {
     lazy: false,
-    onLoad: noop,
-    loaded: false,
+    onLoad:noop,
     effect:'replace'
   };
 
@@ -33,17 +31,16 @@ export default class extends React.PureComponent{
   }
 
   initialState(inProps){
-    const {url,loaded} = inProps;
+    const {url} = inProps;
     this.state = {
-      loaded,
+      loaded:false,
       url
     };
   }
 
   componentWillReceiveProps(nextProps){
-    const {url,lazy,loaded} = nextProps;
-
-    if(this.state.url !== url || this.state.loaded!==loaded){
+    const {url,lazy} = nextProps;
+    if(this.state.url !== url){
       this.initialState(nextProps);
       this.setState(this.state);
     }
@@ -80,9 +77,8 @@ export default class extends React.PureComponent{
   }
 
   _onLoad = inEvent => {
-    const { root } = this.refs;
     const {loaded} = this.state;
-    const {lazy, effect} = this.props;
+    const {lazy} = this.props;
     if(!loaded && !lazy){
       this._counter++;
       this.doShown();
@@ -91,7 +87,8 @@ export default class extends React.PureComponent{
 
 
   render(){
-    const {url,placeholder,className,effect,lazy,loaded,...props} = this.props;
+    const {url,placeholder,className,effect,lazy,...props} = this.props;
+    const {loaded} = this.state;
     const target = placeholder || (lazy ? null : url);
     return (
       <img
@@ -100,7 +97,7 @@ export default class extends React.PureComponent{
         data-effect={effect}
         className={classNames('react-lazyimg',className)}
         data-src={url}
-        data-loaded={this.state.loaded}
+        data-loaded={loaded}
         src={target}
         onLoad={this._onLoad} />
     );
