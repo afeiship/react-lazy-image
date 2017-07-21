@@ -21,28 +21,29 @@ export default class extends React.PureComponent{
 
   static defaultProps = {
     lazy: false,
-    onLoad:noop,
+    onLoad: noop,
     loaded: false,
     effect:'replace'
   };
 
   constructor(props) {
     super(props);
-    this.initialState();
+    this.initialState(props);
     this._counter = 0;
   }
 
-  initialState(){
-    const {url} = this.props;
+  initialState(inProps){
+    const {url,loaded} = inProps;
     this.state = {
-      loaded: props.loaded,
+      loaded,
       url
     };
   }
 
   componentWillReceiveProps(nextProps){
-    const {url,lazy} = nextProps;
-    if(this.state.url !== url){
+    const {url,lazy,loaded} = nextProps;
+
+    if(this.state.url !== url || this.state.loaded!==loaded){
       this.initialState(nextProps);
       this.setState(this.state);
     }
@@ -90,8 +91,7 @@ export default class extends React.PureComponent{
 
 
   render(){
-    const {url,placeholder,className,effect,lazy,...props} = this.props;
-    const {loaded} = this.state;
+    const {url,placeholder,className,effect,lazy,loaded,...props} = this.props;
     const target = placeholder || (lazy ? null : url);
     return (
       <img
@@ -100,7 +100,7 @@ export default class extends React.PureComponent{
         data-effect={effect}
         className={classNames('react-lazyimg',className)}
         data-src={url}
-        data-loaded={loaded}
+        data-loaded={this.state.loaded}
         src={target}
         onLoad={this._onLoad} />
     );
