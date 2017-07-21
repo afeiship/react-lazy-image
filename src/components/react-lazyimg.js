@@ -15,12 +15,14 @@ export default class extends React.PureComponent{
       'replace',
       'fade'
     ]),
-    onLoad:PropTypes.func,
+    loaded: PropTypes.bool,
+    onLoad: PropTypes.func,
   };
 
   static defaultProps = {
     lazy: false,
     onLoad:noop,
+    loaded: false,
     effect:'replace'
   };
 
@@ -33,7 +35,7 @@ export default class extends React.PureComponent{
   initialState(){
     const {url} = this.props;
     this.state = {
-      loaded:false,
+      loaded: props.loaded,
       url
     };
   }
@@ -77,8 +79,9 @@ export default class extends React.PureComponent{
   }
 
   _onLoad = inEvent => {
+    const { root } = this.refs;
     const {loaded} = this.state;
-    const {lazy} = this.props;
+    const {lazy, effect} = this.props;
     if(!loaded && !lazy){
       this._counter++;
       this.doShown();
