@@ -29,6 +29,15 @@ class App extends React.Component{
       <div className="hello-react-lazyimg">
 
         <button onClick={this._click1} >Click do Lazy</button>
+
+        <h1>Aggressive</h1>
+        <ReactLazyimg
+        effect="replace"
+        lazy={this.state.lazy}
+        placeholder={require('./assets/small-2.png')}
+        url={require('./assets/mm.jpg')} title="Fei's logo" size="30px" />
+
+
         <h1>Replace</h1>
         <ReactLazyimg
         effect="replace"
