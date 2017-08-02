@@ -34,6 +34,7 @@
 
 ## todos:
 - [ ] placehodlder should be a component but not a img path.
+- [ ]fadeIn/replaceable should be two components.
 
 ## resouces:
 + http://jsfiddle.net/UtnHS/
