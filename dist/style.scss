@@ -1,0 +1,13 @@
+.react-lazyimg{
+  -moz-transition: opacity .3s ease-in;
+  -webkit-transition: opacity .3s ease-in;
+  -o-transition: opacity .3s ease-in;
+  transition: opacity .3s ease-in;
+  opacity:1;
+
+  &[data-effect=fade]{
+    &[data-src]{
+      opacity: 0.01;
+    }
+  }
+}
