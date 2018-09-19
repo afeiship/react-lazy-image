@@ -22,6 +22,7 @@ export default class extends Component {
 
   render() {
     const { className, fit, ...props } = this.props;
+
     return (
       <figure data-fit={fit} className={classNames('react-lazy-image', className)}>
         <ReactFadeImage {...props} />
