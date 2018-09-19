@@ -15,9 +15,16 @@ button{
   color:#F00;
   padding:50px 20px;
 
+  .list{
+    display: flex;
+    justify-content: space-between;
+    .item{
+      width: 48%;
+    }
+  }
+
   .react-lazy-image{
     width: 100%;
-    height: 640px;
   }
 
   .button{
@@ -37,6 +44,9 @@ button{
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     background: #04be02;
     margin-bottom: 15px;
+    &[disabled]{
+      background: #8e8e93;
+    }
     &:active{
       background: #3cc51f;
     }
