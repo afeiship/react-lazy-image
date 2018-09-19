@@ -1,13 +1,41 @@
-.react-lazyimg{
-  -moz-transition: opacity .3s ease-in;
-  -webkit-transition: opacity .3s ease-in;
-  -o-transition: opacity .3s ease-in;
-  transition: opacity .3s ease-in;
-  opacity:1;
+$react-lazy-image-options: (
+  background-color: #e5e4e4,
+  background-image:
+    "https://static.ws.126.net/163/wap/f2e/milk_index/bg_img_sm_minfy.png"
+) !default;
 
-  &[data-effect=fade]{
-    &[data-src]{
-      opacity: 0.01;
+@import "node_modules/react-fade-image/dist/style.scss";
+
+.react-lazy-image {
+  $background-color: map-get(
+    $map: $react-lazy-image-options,
+    $key: background-color
+  );
+
+  $background-image: map-get(
+    $map: $react-lazy-image-options,
+    $key: background-image
+  );
+
+  background-color: $background-color;
+  background-image: url($background-image);
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &[data-fit="contain"] {
+    > img {
+      object-fit: contain;
     }
+  }
+
+  &[data-fit="cover"] {
+    > img {
+      object-fit: cover;
+    }
+  }
+
+  > img {
+    width: 100%;
+    height: 100%;
   }
 }

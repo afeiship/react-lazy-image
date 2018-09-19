@@ -1,2 +1,2 @@
-import ReactLazyimg from 'components/react-lazyimg';
-export default ReactLazyimg;
+import ReactLazyImage from 'components/react-lazy-image';
+export default ReactLazyImage;

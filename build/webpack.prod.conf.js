@@ -9,8 +9,8 @@ base.entry = {
 base.output = {
   path: config.build.assetsRoot,
   publicPath: config.build.assetsPublicPath,
-  filename: 'react-lazyimg.js',
-  library: 'ReactLazyimg',
+  filename: 'react-lazy-image.js',
+  library: 'ReactLazyImage',
   libraryTarget: 'umd'
 }
 
