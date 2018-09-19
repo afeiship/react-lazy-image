@@ -28,6 +28,14 @@ button{
     min-height: 350px;
   }
 
+  .scroller{
+    .react-lazy-image{
+      width: 400px;
+      height: 350px;
+      margin: 10px auto;
+    }
+  }
+
   .button{
     border: none;
     display: block;
