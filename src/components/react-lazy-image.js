@@ -11,20 +11,26 @@ export default class extends Component {
   static propTypes = {
     className: PropTypes.string,
     onChange: PropTypes.func,
+    placeholder: PropTypes.string,
     fit: PropTypes.string,
   };
 
   static defaultProps = {
     onChange: noop,
+    placeholder: 'https://static.ws.126.net/163/wap/f2e/milk_index/bg_img_sm_minfy.png',
     fit: 'contain'
   };
   /*===properties end===*/
 
   render() {
-    const { className, fit, ...props } = this.props;
+    const { className, placeholder, fit, ...props } = this.props;
 
     return (
-      <figure data-fit={fit} className={classNames('react-lazy-image', className)}>
+      <figure
+        data-fit={fit}
+        style={{ backgroundImage: `url(${placeholder})`}}
+        className={classNames('react-lazy-image', className)}
+      >
         <ReactFadeImage {...props} />
       </figure>
     );

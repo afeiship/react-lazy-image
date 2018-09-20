@@ -75,6 +75,7 @@ class App extends React.Component {
               return (
                 <ReactLazyImage
                   key={index}
+                  id={`id_${index}`}
                   lazy={true}
                   once={true}
                   src={item} ref='rc' />
