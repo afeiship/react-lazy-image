@@ -1,11 +1,14 @@
 import './dev.scss';
 import ReactLazyImage from './main';
+import nxDebounce from 'next-debounce';
+import nxThrottle from 'next-throttle';
 
 /*===example start===*/
 
 // install: npm install afeiship/react-lazy-image --save
 // import : import ReactLazyImage from 'react-lazy-image'
 
+// TODO: NOT a good implementation
 function isElementInViewport(el, offset = 0) {
   const box = el.getBoundingClientRect(),
     top = (box.top >= 0),
@@ -22,16 +25,11 @@ class App extends React.Component {
       'https://placeimg.com/640/480/nature',
       'https://placeimg.com/640/480/people',
       'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
-      'https://placeimg.com/640/480/nature',
+      'https://placeimg.com/640/480/animals',
+      'https://placeimg.com/640/480/arch',
+      'https://placeimg.com/640/480/tech',
+      'https://placeimg.com/640/480/tech/grayscale',
+      'https://placeimg.com/640/480/tech/sepia',
       'https://placeimg.com/640/480/nature',
     ],
     scrollLazyValues: []
@@ -47,19 +45,21 @@ class App extends React.Component {
     const els = [].slice.call(elements);
     els.forEach((el, index) => {
       if (scrollLazyValues[index] === undefined || scrollLazyValues[index] === true) {
-        scrollLazyValues[index] = !isElementInViewport(el, 200);
+        scrollLazyValues[index] = !isElementInViewport(el, 400);
       }
     });
-    console.log(scrollLazyValues);
+
+    // console.log(scrollLazyValues);
 
     this.setState({ scrollLazyValues });
   }
 
   componentDidMount() {
     this.updateLazyValues();
-    window.onscroll = () => {
+    window.onscroll = nxThrottle(() => {
+      console.log('throttle...');
       this.updateLazyValues();
-    }
+    });
   }
 
   render() {
@@ -93,7 +93,7 @@ class App extends React.Component {
                   key={index}
                   lazy={scrollLazyValues[index]}
                   once={true}
-                  src="http://imglf5.nosdn.127.net/img/MmU4dzhkalUyS3ZaWXY3YzJxejdZNjF5c2t4UFRXTkwxRXNXbUNwdzFSYWpoM3NuSEZxbTF3PT0.jpg?imageView&thumbnail=2664y2000&type=jpg&quality=96&stripmeta=0&type=jpg" ref='rc' />
+                  src={item} ref='rc' />
               )
             })
           }
