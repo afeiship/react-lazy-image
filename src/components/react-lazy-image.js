@@ -10,13 +10,11 @@ export default class extends Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
-    onChange: PropTypes.func,
     placeholder: PropTypes.string,
     fit: PropTypes.string,
   };
 
   static defaultProps = {
-    onChange: noop,
     placeholder: 'https://static.ws.126.net/163/wap/f2e/milk_index/bg_img_sm_minfy.png',
     fit: 'contain'
   };
