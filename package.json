@@ -62,6 +62,7 @@
     "json-loader": "^0.5.4",
     "lolex": "^1.4.0",
     "next-debounce": "github:afeiship/next-debounce",
+    "next-scroll-lazy-image": "github:afeiship/next-scroll-lazy-image",
     "next-throttle": "github:afeiship/next-throttle",
     "node-sass": "^3.13.0",
     "opn": "^4.0.2",

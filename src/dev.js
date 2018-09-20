@@ -2,6 +2,7 @@ import './dev.scss';
 import ReactLazyImage from './main';
 import nxDebounce from 'next-debounce';
 import nxThrottle from 'next-throttle';
+import NxScrollLazyImage from 'next-scroll-lazy-image';
 
 /*===example start===*/
 
@@ -34,41 +35,21 @@ class App extends React.Component {
       'https://placeimg.com/640/480/tech/grayscale',
       'https://placeimg.com/640/480/tech/sepia',
       'https://placeimg.com/640/480/nature/grayscale',
-    ],
-    scrollLazyValues: []
+    ]
   };
 
   _onClick1 = (inEvent) => {
     this.setState({ lazyValue: false });
   };
 
-  updateLazyValues() {
-    const { scrollLazyValues } = this.state;
-    const elements = document.querySelectorAll('.scroller .react-lazy-image');
-    const els = [].slice.call(elements);
-    els.forEach((el, index) => {
-      if (scrollLazyValues[index] === undefined || scrollLazyValues[index] === true) {
-        scrollLazyValues[index] = !isElementInViewport(el, 400);
-      }
-    });
-
-    // console.log(scrollLazyValues);
-
-    this.setState({ scrollLazyValues });
-  }
-
   componentDidMount() {
-    this.updateLazyValues();
-    window.onscroll = nxThrottle(() => {
-      console.log('throttle...');
-      this.updateLazyValues();
-    });
+    this._scrollerLazyImage = new NxScrollLazyImage( document.querySelector('.scroller'));
   }
 
   render() {
     // https://react-progressive-bg-image.netlify.com/static/media/image1.9c4f63a7.jpg
     // http://imglf5.nosdn.127.net/img/MmU4dzhkalUyS3ZaWXY3YzJxejdZNjF5c2t4UFRXTkwxRXNXbUNwdzFSYWpoM3NuSEZxbTF3PT0.jpg?imageView&thumbnail=2664y2000&type=jpg&quality=96&stripmeta=0&type=jpg
-    const { scrollLazyValues, lazyValue } = this.state;
+    const { lazyValue } = this.state;
 
     return (
       <div className="hello-react-lazy-image">
@@ -94,7 +75,7 @@ class App extends React.Component {
               return (
                 <ReactLazyImage
                   key={index}
-                  lazy={scrollLazyValues[index]}
+                  lazy={true}
                   once={true}
                   src={item} ref='rc' />
               )
