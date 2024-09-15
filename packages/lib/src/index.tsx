@@ -1,4 +1,4 @@
-import { Component, HTMLAttributes, ReactNode } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
 import LazyLoad, { ILazyLoadInstance, ILazyLoadOptions } from 'vanilla-lazyload';
 
@@ -10,7 +10,7 @@ export type ReactLazyLoadImageProps = {
   container?: HTMLElement | null;
 } & HTMLAttributes<HTMLDivElement>;
 
-export default class ReactLazyLoadImage extends Component<ReactLazyLoadImageProps> {
+export default class ReactLazyLoadImage extends React.Component<ReactLazyLoadImageProps> {
   static displayName = CLASS_NAME;
   static version = '__VERSION__';
   static defaultProps = {
