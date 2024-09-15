@@ -21,12 +21,16 @@ export default class ReactLazyLoadImage extends Component<ReactLazyLoadImageProp
   };
 
   private lazyLoad: ILazyLoadInstance | null = null;
+  private rootElement: HTMLElement | null = null;
+
+  get container() {
+    return this.props.container || this.rootElement;
+  }
 
   componentDidUpdate() {
-    const { container, options } = this.props;
-    if (!container) return;
+    const { options } = this.props;
     this.lazyLoad = new LazyLoad({
-      container,
+      container: this.container,
       options,
     } as ILazyLoadOptions);
   }
@@ -40,7 +44,7 @@ export default class ReactLazyLoadImage extends Component<ReactLazyLoadImageProp
   render() {
     const { children, className, container, options, ...rest } = this.props;
     return (
-      <div className={cx(CLASS_NAME, className)} {...rest}>
+      <div ref={root => this.rootElement = root} className={cx(CLASS_NAME, className)} {...rest}>
         {children}
       </div>
     );

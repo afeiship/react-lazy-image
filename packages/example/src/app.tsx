@@ -36,6 +36,23 @@ function App() {
           </div>
         </ReactLazyLoadImage>
       </div>
+      <hr className="my-5" />
+      <div className="text-center y-2 layout-abs-scrollable h-100">
+        <ReactLazyLoadImage className="is-scrollable-y">
+          {dataSource.map((item: any, index) => {
+            return <div key={index}>
+              <img
+                className="lazy w-full"
+                width={item.width}
+                height={item.height}
+                src="https://web-assets.alo7.com/assets/images/apply7-ph.jpg"
+                data-src={item.download_url}
+                alt={item.alt}
+              />
+            </div>;
+          })}
+        </ReactLazyLoadImage>
+      </div>
 
 
     </div>
