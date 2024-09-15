@@ -24,6 +24,16 @@ npm install -S @jswork/react-lazy-image
 __GENERATE_DAPP__
   ```
 
+## img
+```jsx
+<img 
+  className="lazy"
+  data-src="https://via.placeholder.com/realimage.jpg"
+  src="https://via.placeholder.com/fallback.jpg" 
+  alt="image" 
+/>;
+```
+
 ## preview
 - https://afeiship.github.io/react-lazy-image/
 
