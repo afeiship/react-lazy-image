@@ -1,3 +1,19 @@
-//.react-lazy-image {
-//  color: red;
-//}
+.react-lazy-image {
+  img.lazy {
+    opacity: 0.3;
+  }
+
+  img:not(.initial) {
+    transition: opacity 1s;
+  }
+
+  img.initial,
+  img.loaded,
+  img.error {
+    opacity: 1;
+  }
+
+  img:not([src]) {
+    visibility: hidden;
+  }
+}

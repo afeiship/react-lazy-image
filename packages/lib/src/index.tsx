@@ -1,30 +1,46 @@
-// import noop from '@jswork/noop';
+import { Component, HTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
-import React, { ReactNode, Component, HTMLAttributes } from "react";
+import LazyLoad, { ILazyLoadInstance, ILazyLoadOptions } from 'vanilla-lazyload';
 
-const CLASS_NAME = "react-lazy-image";
-// const uuid = () => Math.random().toString(36).substring(2, 9);
+const CLASS_NAME = 'react-lazy-image';
 export type ReactLazyLoadImageProps = {
-  /**
-   * The extended className for component.
-   * @default ''
-   */
+  children: ReactNode;
   className?: string;
-  /**
-   * The children element.
-   */
-  children?: ReactNode;
+  options: Omit<ILazyLoadOptions, 'container'>;
+  container?: HTMLElement | null;
 } & HTMLAttributes<HTMLDivElement>;
 
 export default class ReactLazyLoadImage extends Component<ReactLazyLoadImageProps> {
   static displayName = CLASS_NAME;
-  static version = "__VERSION__";
-  static defaultProps = {};
+  static version = '__VERSION__';
+  static defaultProps = {
+    debounce: 0,
+    options: {
+      cancel_on_exit: true,
+    },
+  };
+
+  private lazyLoad: ILazyLoadInstance | null = null;
+
+  componentDidUpdate() {
+    const { container, options } = this.props;
+    if (!container) return;
+    this.lazyLoad = new LazyLoad({
+      container,
+      options,
+    } as ILazyLoadOptions);
+  }
+
+  componentWillUnmount() {
+    if (this.lazyLoad) {
+      this.lazyLoad.destroy();
+    }
+  }
 
   render() {
-    const { className, children,...rest } = this.props;
+    const { children, className, container, options, ...rest } = this.props;
     return (
-      <div data-component={CLASS_NAME} className={cx(CLASS_NAME, className)} {...rest}>
+      <div className={cx(CLASS_NAME, className)} {...rest}>
         {children}
       </div>
     );
