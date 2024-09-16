@@ -16,7 +16,7 @@ export default class ReactLazyLoadImage extends React.Component<ReactLazyLoadIma
   static defaultProps = {
     debounce: 0,
     options: {
-      cancel_on_exit: true,
+      cancel_on_exit: false,
     },
   };
 
